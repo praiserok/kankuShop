@@ -3,10 +3,10 @@
 @section('title', 'Категорія ' . $category->name)
 
 @section('content')
-    <div class="col-md-12">
-        <h1>Категорія - <b>{{ $category->name }}</b></h1>
-        <table class="table">
-            <tbody>
+<div class="col-md-12">
+    <h1>Категорія - <b>{{ $category->name }}</b></h1>
+    <table class="table">
+        <tbody>
             <tr>
                 <th>
                     Поле
@@ -39,7 +39,7 @@
                 <td>Кількість товарів</td>
                 <td>{{ $category->products->count() }}</td>
             </tr>
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 @endsection

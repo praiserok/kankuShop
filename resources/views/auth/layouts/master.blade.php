@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,25 +20,26 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/admin.css" rel="stylesheet">
 </head>
+
 <body>
-<div id="app">
-    <nav class="navbar navbar-default navbar-expand-md navbar-light navbar-laravel">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('index') }}">
-                Вернутися на сайт
-            </a>
+    <div id="app">
+        <nav class="navbar navbar-default navbar-expand-md navbar-light navbar-laravel">
+            <div class="container">
+                <a class="navbar-brand" href="{{ route('index') }}">
+                    Вернутися на сайт
+                </a>
 
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    @admin
-                    <li><a href="{{ route('categories.index') }}">Категорії</a></li>
-                    <li><a href="{{ route('products.index') }}">Товари</a>
-                    </li>
-                    <li><a href="{{ route('home') }}">Замовлення</a></li>
-                    @endadmin
-                </ul>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        @admin
+                        <li><a href="{{ route('categories.index') }}">Категорії</a></li>
+                        <li><a href="{{ route('products.index') }}">Товари</a>
+                        </li>
+                        <li><a href="{{ route('home') }}">Замовлення</a></li>
+                        @endadmin
+                    </ul>
 
-                @guest
+                    @guest
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Увійти</a>
@@ -46,44 +48,43 @@
                             <a class="nav-link" href="{{ route('register') }}">Зареєструватися</a>
                         </li>
                     </ul>
-                @endguest
+                    @endguest
 
-                @auth
+                    @auth
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" v-pre>
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 @admin Адміністратор @else {{ Auth::user()->name }} @endadmin
 
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout')}}"
-                                   onclick="event.preventDefault();
+                                <a class="dropdown-item" href="{{ route('logout')}}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     Вийти
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout')}}" method="POST"
-                                      style="display: none;">
+                                    style="display: none;">
                                     @csrf
                                 </form>
                             </div>
                         </li>
                     </ul>
-                @endauth
+                    @endauth
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <div class="py-4">
-        <div class="container">
-            <div class="row justify-content-center">
-                @yield('content')
+        <div class="py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    @yield('content')
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>
