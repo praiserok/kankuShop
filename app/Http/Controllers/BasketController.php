@@ -28,9 +28,9 @@ class BasketController extends Controller
         $success = $order->saveOrder($request->name, $request->phone);
 
         if ($success) {
-            session()->flash('success', 'Ваш заказ принят в обработку!');
+            session()->flash('success', 'Ваше замовлення прийнято в обробку!');
         } else {
-            session()->flash('warning', 'Случилась ошибка');
+            session()->flash('warning', 'Сталась помилка');
         }
 
         return redirect()->route('index');
