@@ -40,7 +40,7 @@
                 @guest
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Війти</a>
+                            <a class="nav-link" href="{{ route('login') }}">Увійти</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">Зареєструватися</a>

@@ -71,7 +71,7 @@ class BasketController extends Controller
 
         $product = Product::find($productId);
 
-        session()->flash('success', 'Добавлен товар ' . $product->name);
+        session()->flash('success', 'Добавлений товар ' . $product->name);
 
         return redirect()->route('basket');
     }
@@ -96,7 +96,7 @@ class BasketController extends Controller
 
         $product = Product::find($productId);
 
-        session()->flash('warning', 'Удален товар  ' . $product->name);
+        session()->flash('warning', 'Видалений товар  ' . $product->name);
 
         return redirect()->route('basket');
     }
