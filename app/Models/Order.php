@@ -29,6 +29,7 @@ class Order extends Model
     {
         session()->forget('full_order_sum');
     }
+    }
 
     public static function changeFullSum($changeSum)
     {
