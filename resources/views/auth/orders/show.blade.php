@@ -28,14 +28,14 @@
                                     {{ $product->name }}
                                 </a>
                             </td>
-                            <td><span class="badge">1</span></td>
+                            <td><span class="badge">{{ $product->pivot->count }}</span></td>
                             <td>{{ $product->price }} грн.</td>
                             <td>{{ $product->getPriceForCount()}} грн.</td>
                         </tr>
                         @endforeach
                         <tr>
                             <td colspan="3">Загальна вартість:</td>
-                            <td>{{ $order->getFullPrice() }} грн.</td>
+                            <td>{{ $order->calculateFullSum() }} грн.</td>
                         </tr>
                     </tbody>
                 </table>
