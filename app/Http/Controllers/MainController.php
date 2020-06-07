@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
-    public function index(ProductsFilterRequest $request) {
+    public function index(ProductsFilterRequest $request)
+    {
 
         $productsQuery = Product::with('category');
 
@@ -20,8 +21,8 @@ class MainController extends Controller
         if ($request->filled('price_to')) {
             $productsQuery->where('price', '<=', $request->price_to);
         }
-        foreach (['hit', 'new', 'recommend'] as $field){
-            if ($request->has($field)){
+        foreach (['hit', 'new', 'recommend'] as $field) {
+            if ($request->has($field)) {
                 $productsQuery->$field();
             }
         }
@@ -43,14 +44,10 @@ class MainController extends Controller
     }
 
 
-    public function product ($code)
+    public function product($category, $productCode)
     {
-        $product = Product::get();
+        $product = Product::withTrashed()->byCode($productCode)->first();
         return view('product', compact('product'));
     }
 
-//    public function product($category, $product = null)
-//    {
-//        return view('product', ['product' => $product]);
-//    }
 }
