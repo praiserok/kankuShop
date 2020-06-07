@@ -3,11 +3,46 @@
 @section('title', 'Головна')
 
 @section('content')
-<h1>Всі товари</h1>
+    <h1>Всі товари</h1>
+    <form method="GET" action="{{ route("index") }}">
+        <div class="filters row">
+            <div class="col-sm-6 col-md-3">
+                @include('auth.layouts.error', ['fieldName' => 'price_from'])
+                <label for="price_from">Ціна від
+                    <input type="text" name="price_from" id="price_from" size="6" value="{{ request()->price_from }}">
+                </label>
+                <label for="price_to">до
+                    <input type="text" name="price_to" id="price_to" size="6" value="{{ request()->price_to }}">
+                </label>
+                @include('auth.layouts.error', ['fieldName' => 'price_to'])
+            </div>
 
-<div class="row">
-    @foreach($products as $product)
-    @include('layouts.card', compact('product'))
-    @endforeach
-</div>
+            <div class="col-sm-2 col-md-2">
+                <label for="hit">
+                    <input type="checkbox" name="hit" id="hit" @if (request()->has('hit')) checked @endif> Хіт
+                </label>
+            </div>
+            <div class="col-sm-2 col-md-2">
+                <label for="new">
+                    <input type="checkbox" name="new" id="new" @if (request()->has('new')) checked @endif> Новинка
+                </label>
+            </div>
+            <div class="col-sm-2 col-md-2">
+                <label for="recommend">
+                    <input type="checkbox" name="recommend" id="recommend"
+                           @if (request()->has('recommend')) checked @endif> Рекомендуємо
+                </label>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <button type="submit" class="btn btn-primary">Фільтр</button>
+                <a href="{{ route('index') }}" class="btn btn-warning">Скинути</a>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        @foreach($products as $product)
+            @include('layouts.card', compact('product'))
+        @endforeach
+    </div>
+    {{ $products->links() }}
 @endsection

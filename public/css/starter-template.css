@@ -25,6 +25,7 @@ div.labels {
 
 div.labels span.badge {
     display: block;
+    margin-bottom: 2px;
 }
 
 span.badge.badge-success {
@@ -44,11 +45,4 @@ span.badge.badge-danger {
 
 div.filters {
     padding-bottom: 5px;
-}
-
-footer {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    color: #99979c;
-    background-color: #2a2730;
 }

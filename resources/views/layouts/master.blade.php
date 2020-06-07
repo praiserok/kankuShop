@@ -18,7 +18,8 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ route('index') }}">КанкуShop</a>
+                <a class="navbar-brand" href="{{ route('index') }}"><img src="/img/kanku.png" alt="Канку"> КанкуShop</a>
+
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -26,7 +27,7 @@
                     <li @routeactive('categor*')><a href="{{ route('categories') }}">Категорії</a>
                     </li>
                     <li @routeactive('basket*')><a href="{{ route('basket') }}">В корзину</a></li>
-                    <li><a href="{{ route('index') }}">Скинути в початковий етап</a></li>
+                    <li><a href="{{ route('reset') }}">Скинути в початковий етап</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
