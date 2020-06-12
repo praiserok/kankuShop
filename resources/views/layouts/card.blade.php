@@ -18,9 +18,9 @@
             <p>
                 <form action="{{ route('basket-add', $product) }}" method="POST">
                 @if($product->isAvailable())
-                    <button type="submit" class="btn btn-primary" role="button">В корзину</button>
+                    <button type="submit" class="btn btn-success" role="button">В корзину</button>
                 @else
-                    Не доступний
+                    Немає в наявності
                 @endif
                 <a href="{{ route('product', [isset($category) ? $category->code : $product->category->code, $product->code]) }}"
                    class="btn btn-default"

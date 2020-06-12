@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Classes\Basket;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -12,26 +13,18 @@ class BasketController extends Controller
 {
     public function basket()
     {
-        $orderId = session('orderId');
-        if (!is_null($orderId)) {
-            $order = Order::findOrFail($orderId);
-        }
+        $order = (new Basket())->getOrder();
+
         return view('basket', compact('order'));
     }
 
     public function basketConfirm(Request $request)
     {
-        $orderId = session('orderId');
-        if (is_null($orderId)) {
-            return redirect()->route('index');
-        }
-        $order = Order::find($orderId);
-        $success = $order->saveOrder($request->name, $request->phone);
-
-        if ($success) {
+        $email = Auth::check() ? Auth::user()->email : $request->email;
+        if ((new Basket())->saveOrder($request->name, $request->phone, $email)) {
             session()->flash('success', 'Ваше замовлення прийнято в обробку!');
         } else {
-            session()->flash('warning', 'Сталась помилка');
+            session()->flash('warning', 'Товар не доступний для замовлення в вашій кількості!');
         }
 
         Order::eraseOrderSum();
@@ -41,70 +34,35 @@ class BasketController extends Controller
 
     public function basketPlace()
     {
-        $orderId = session('orderId');
-        if (is_null($orderId)) {
-            return redirect()->route('index');
+        $basket = new Basket();
+        $order = $basket->getOrder();
+        if (!$basket->countAvailable()) {
+            session()->flash('warning',
+                'Товар не доступний для замовлення в вашій кількості!');
+            return redirect()->route('basket');
         }
-        $order = Order::find($orderId);
         return view('order', compact('order'));
     }
 
-    public function basketAdd($productId)
+    public function basketAdd(Product $product)
     {
-        $orderId = session('orderId');
-        if (is_null($orderId)) {
-            $order = Order::create();
-            session(['orderId' => $order->id]);
+        $result = (new Basket(true))->addProduct($product);
+
+        if ($result) {
+            session()->flash('success', 'Добавлений товар ' . $product->name);
         } else {
-            $order = Order::find($orderId);
+            session()->flash('warning',
+                'Більшої кількості ' . $product->name . ' не має в наявності!');
         }
-
-        if ($order->products->contains($productId)) {
-            $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
-            $pivotRow->count++;
-            $pivotRow->update();
-        } else {
-            $order->products()->attach($productId);
-        }
-
-        if (Auth::check()) {
-            $order->user_id = Auth::id();
-            $order->save();
-        }
-
-        $product = Product::find($productId);
-
-        Order::changeFullSum($product->price);
-
-        session()->flash('success', 'Добавлений товар ' . $product->name);
 
         return redirect()->route('basket');
     }
 
-    public function basketRemove($productId)
+    public function basketRemove(Product $product)
     {
-        $orderId = session('orderId');
-        if (is_null($orderId)) {
-            return redirect()->route('basket');
-        }
-        $order = Order::find($orderId);
-
-        if ($order->products->contains($productId)) {
-            $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
-            if ($pivotRow->count < 2) {
-                $order->products()->detach($productId);
-            } else {
-                $pivotRow->count--;
-                $pivotRow->update();
-            }
-        }
-
-        $product = Product::find($productId);
-
-        Order::changeFullSum(-$product->price);
+        (new Basket())->removeProduct($product);
 
         session()->flash('warning', 'Видалений товар  ' . $product->name);
-
         return redirect()->route('basket');
     }
 }
