@@ -22,9 +22,9 @@ class BasketController extends Controller
     {
         $email = Auth::check() ? Auth::user()->email : $request->email;
         if ((new Basket())->saveOrder($request->name, $request->phone, $email)) {
-            session()->flash('success', 'Ваше замовлення прийнято в обробку!');
+            session()->flash('success', __('basket.you_order_confirmed'));
         } else {
-            session()->flash('warning', 'Товар не доступний для замовлення в вашій кількості!');
+            session()->flash('warning', __('basket.product_not_available_your_quantity'));
         }
 
         Order::eraseOrderSum();
@@ -38,7 +38,7 @@ class BasketController extends Controller
         $order = $basket->getOrder();
         if (!$basket->countAvailable()) {
             session()->flash('warning',
-                'Товар не доступний для замовлення в вашій кількості!');
+                __('basket.product_not_available_your_quantity'));
             return redirect()->route('basket');
         }
         return view('order', compact('order'));
@@ -49,10 +49,10 @@ class BasketController extends Controller
         $result = (new Basket(true))->addProduct($product);
 
         if ($result) {
-            session()->flash('success', 'Добавлений товар ' . $product->name);
+            session()->flash('success', __('basket.add_product') . $product->name);
         } else {
             session()->flash('warning',
-                'Більшої кількості ' . $product->name . ' не має в наявності!');
+                __('basket.more') . $product->name . __('basket.not_available'));
         }
 
         return redirect()->route('basket');
@@ -62,7 +62,7 @@ class BasketController extends Controller
     {
         (new Basket())->removeProduct($product);
 
-        session()->flash('warning', 'Видалений товар  ' . $product->name);
+        session()->flash('warning', __('basket.deleted_item') . $product->name);
         return redirect()->route('basket');
     }
 }

@@ -1,0 +1,26 @@
+<?php
+return [
+    'online_shop' => 'КанкуShop',
+    'all_products' => 'Всі товари',
+    'categories' => 'Категорії',
+    'basket' => 'Корзина',
+    'sign_in' => 'Увійти',
+    'admin' => 'Панель адміністратора',
+    'my_orders' => 'Мої замовлення',
+    'sign_out' => 'Вийти',
+    'price_from' => 'Ціна від',
+    'price_to' => 'до',
+    'filter' => 'Фільтр',
+    'reset' => 'Скинути',
+    'add_to_cart' => 'В корзину',
+    'read_more' => 'Детальніше',
+    'not_available' => 'Немає в наявності',
+    'current_lang' => 'ua',
+    'set_lang' => 'en',
+    'properties' => [
+        'hit' => 'Хіт',
+        'hit_shop'=> 'Хіт продаж!',
+        'new' => 'Новинка',
+        'recommend' => 'Рекомендуємо',
+    ],
+];

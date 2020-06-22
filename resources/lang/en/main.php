@@ -1,0 +1,26 @@
+<?php
+return [
+    'online_shop' => 'KankuShop',
+    'all_products' => 'All products',
+    'categories' => 'Categories',
+    'basket' => 'Basket',
+    'sign_in' => 'Sign in',
+    'admin' => 'Admin panel',
+    'my_orders' => 'My orders',
+    'sign_out' => 'Sign out',
+    'price_from' => 'Price from',
+    'price_to' => 'to',
+    'filter' => 'Filter',
+    'reset' => 'Reset',
+    'add_to_cart'=> 'Add to cart',
+    'read_more'=>'Read more',
+    'not_available'=> 'Not available',
+    'current_lang' => 'en',
+    'set_lang' => 'ua',
+    'properties' => [
+        'hit' => 'Hit',
+        'new' => 'New',
+        'hit_shop'=> 'Hit sale!',
+        'recommend' => 'Recommend',
+    ],
+];

@@ -1,18 +1,18 @@
 @extends('layouts.master')
 
-@section('title', 'Корзина')
+@section('title', __('basket.basket'))
 
 @section('content')
-<h1>Корзина</h1>
-<p>Оформлення замовлення</p>
+<h1>@lang('basket.basket')</h1>
+<p>@lang('basket.ordering')</p>
 <div class="panel">
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Назва</th>
-                <th>Кількість</th>
-                <th>Ціна</th>
-                <th>Вартість</th>
+                <th>@lang('basket.name')</th>
+                <th>@lang('basket.quantity')</th>
+                <th>@lang('basket.price')</th>
+                <th>@lang('basket.cost')</th>
             </tr>
         </thead>
         <tbody>
@@ -43,15 +43,14 @@
             </tr>
             @endforeach
             <tr>
-                <td colspan="3">Загальна вартість:</td>
+                <td colspan="3">@lang('basket.total')</td>
                 <td>{{ $order->getFullSum() }} грн.</td>
             </tr>
         </tbody>
     </table>
     <br>
     <div class="btn-group pull-right" role="group">
-        <a type="button" class="btn btn-success" href="{{ route('basket-place') }}">Оформити
-            замовлення</a>
+        <a type="button" class="btn btn-success" href="{{ route('basket-place') }}">@lang('basket.issue')</a>
     </div>
 </div>
 @endsection

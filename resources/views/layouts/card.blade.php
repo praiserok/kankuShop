@@ -2,13 +2,13 @@
     <div class="thumbnail">
         <div class="labels">
             @if ($product->isNew())
-                <span class="badge badge-success">Новинка</span>
+                <span class="badge badge-success">@lang('main.properties.new')</span>
                 @endif
             @if ($product->isRecommend())
-                    <span class="badge badge-warning">Рекомендуємо</span>
+                    <span class="badge badge-warning">@lang('main.properties.recommend')</span>
                 @endif
             @if ($product->isHit())
-                    <span class="badge badge-danger">Хіт продаж!</span>
+                    <span class="badge badge-danger">@lang('main.properties.hit_shop')</span>
                 @endif
         </div>
         <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}">
@@ -18,13 +18,13 @@
             <p>
                 <form action="{{ route('basket-add', $product) }}" method="POST">
                 @if($product->isAvailable())
-                    <button type="submit" class="btn btn-success" role="button">В корзину</button>
+                    <button type="submit" class="btn btn-success" role="button">@lang('main.add_to_cart')</button>
                 @else
-                    Немає в наявності
+                    @lang('main.not_available')
                 @endif
                 <a href="{{ route('product', [isset($category) ? $category->code : $product->category->code, $product->code]) }}"
                    class="btn btn-default"
-                       role="button">Детальніше</a>
+                       role="button">@lang('main.read_more')</a>
                     @csrf
                 </form>
             </p>
